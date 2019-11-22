@@ -14,15 +14,18 @@ const Profile = (props) => {
         .catch(err => console.log(err))
     }, [])
 
-    
+
 console.log(id, 'id')
 console.log(trips)
 
     return (
         <div className='profile'>
-            {trips.map(t => (
-                <p>{t.trip_title}</p>
-            ))}
+            {trips.length ? 
+                trips.map(t => (
+                    <p>{t.trip_title}</p>
+                )) :
+                <p>No trips yet!</p>
+            }
 
 
 

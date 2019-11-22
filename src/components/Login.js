@@ -31,7 +31,7 @@ const Login = (props) => {
                 }
                 
             }}
-            render={({ errors, status, touched}) => (
+            render={({ errors, touched}) => (
                 <Form>
                     <FormGroup>
                             <Field type="text" name="username" id="exampleEmail" placeholder="username" 
