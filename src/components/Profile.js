@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import TripThumb from './TripThumb';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { Button } from 'reactstrap';
 
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
@@ -26,7 +27,7 @@ console.log(trips)
     return (
         <div className='profile'>
             <NavLink to={`/profile/${id}/newtrip`} >    
-              <button>new trip</button>
+              <Button outline color="secondary">new trip</Button>
             </NavLink>
             
             {trips.length ? 
@@ -38,10 +39,20 @@ console.log(trips)
                     city={t.city}
                     country={t.country}
                       />
-                      <button onClick={()=> {
+                      <Button 
+                      outline color="info"
+                      onClick={()=> {
                         props.history.push(`/edit/${t.id}`)
-                    }}>edit</button>
-                    <button onClick={() => {
+                    }}>edit</Button>
+                    
+                    <Button  
+                    outline color="info"
+                    onClick={() => props.history.push(`/addphoto/${t.id}`)}
+                    >add photo</Button>
+
+                    <Button 
+                    outline color="danger"
+                    onClick={() => {
                         axiosWithAuth()
                         .delete(`/trips/${t.id}`)
                         .then(res => {
@@ -53,7 +64,7 @@ console.log(trips)
                             })
                             .catch(err => console.log(err))
                         })
-                    }}>x</button>
+                    }}>x</Button>
                     </>
                 )) :
                 <p>No trips yet!</p>
