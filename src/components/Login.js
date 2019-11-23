@@ -1,8 +1,8 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { FormGroup, Label, Input, Button } from 'reactstrap';
+import { FormGroup, Button } from 'reactstrap';
 
 const Login = (props) => {
 
@@ -22,6 +22,7 @@ const Login = (props) => {
                 try {
                    let res = await axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
                         localStorage.setItem('token', res.data.token)
+                        localStorage.setItem('id', res.data.id)
                         props.history.push(`/profile/${res.data.id}`)
                         console.log(res, 'response')
                 } catch(err) {

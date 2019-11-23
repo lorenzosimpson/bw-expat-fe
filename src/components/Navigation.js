@@ -12,7 +12,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
 } from 'reactstrap';
 
 const Navigation = (props) => {
@@ -37,6 +36,11 @@ const Navigation = (props) => {
             <NavItem>
               <RouteLink to='/register'>
                 <NavLink>Register</NavLink>
+              </RouteLink>
+            </NavItem>
+            <NavItem>
+              <RouteLink to={localStorage.getItem('token')? `/profile/${localStorage.getItem('id')}` : '/login'}>
+                <NavLink>Profile</NavLink>
               </RouteLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>

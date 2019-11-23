@@ -1,8 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import { Formik, Form, Field } from 'formik';
-import { FormGroup, Label, Input, Button } from 'reactstrap';
-import * as Yup from 'yup';
+import { FormGroup, Button } from 'reactstrap';
+// import * as Yup from 'yup';
+
+import axiosWithAuth from '../utils/axiosWithAuth'
 
 const AddTrip = (props) => {
     const user_id = props.match.params.id
@@ -18,9 +20,13 @@ const AddTrip = (props) => {
             }}
             onSubmit={fields => {
                
-                    axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/trips`, fields)
+                    axiosWithAuth().post(`/trips`, fields)
                     .then(res => {
                         console.log(res)
+                        props.history.push(`/profile/${user_id}`)
+                        axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${user_id}/trips`)
+                        .then(res => console.log(res))
+                        .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err))
             }}

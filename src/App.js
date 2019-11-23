@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Register from './components/Register';
 import AddTrip from './components/AddTrip'
+import EditTrip from './components/EditTrip';
 import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute'
 
@@ -18,6 +19,7 @@ function App() {
       <Route exact path='/register' component={Register} />
       <PrivateRoute exact path='/profile/:id' component={Profile} />
       <PrivateRoute exact path='/profile/:id/newtrip' component={AddTrip} />
+      <PrivateRoute exact path='/edit/:id' component={EditTrip} />
     </div>
   );
 }
