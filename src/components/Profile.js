@@ -7,7 +7,7 @@ import { Button } from 'reactstrap';
 
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
-    const id = props.match.params.id
+    const id = localStorage.getItem('id')
 
     useEffect(() => {
         axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
@@ -27,7 +27,7 @@ console.log(trips)
     return (
         <div className='profile'>
             <NavLink to={`/profile/${id}/newtrip`} >    
-              <Button outline color="secondary">new trip</Button>
+            <Button id='block-btn' outline color="primary" size="lg" block>New trip + </Button>
             </NavLink>
             
             {trips.length ? 
@@ -62,7 +62,10 @@ console.log(trips)
                                 console.log(res)
                                 setTrips(res.data)
                             })
-                            .catch(err => console.log(err))
+                            .catch(err => {
+                                console.log(err)
+                                setTrips([])
+                            })
                         })
                     }}>x</Button>
                     </>

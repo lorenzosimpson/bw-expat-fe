@@ -1,8 +1,11 @@
 @import './TripThumb.scss';
+@import './Navigation.scss';
+@import './Home.scss';
+@import './Profile.scss';
 
 
 .App {
-    text-align: center;
+    height: 100vh;
   }
   
   .App-logo {
@@ -22,5 +25,10 @@
   
   .App-link {
     color: #09d3ac;
+  }
+
+  form {
+    text-align: center;
+    margin-top: 50px;
   }
   

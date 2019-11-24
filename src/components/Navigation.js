@@ -23,7 +23,7 @@ const Navigation = (props) => {
     <div>
       <Navbar color="light" light expand="md">
         <RouteLink to="/">
-          <NavbarBrand>expatJournal</NavbarBrand>
+          <NavbarBrand id='expat-logo'>expatJournal</NavbarBrand>
         </RouteLink>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
