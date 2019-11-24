@@ -8,7 +8,7 @@ const Home = (props) => {
         <Container id='container' fluid>
           <h1 className="display-3">Share your stories</h1>
           <p className="lead">From all over the world.</p>
-          <Button outline color="secondary" size="lg">Get Started</Button>
+          <Button outline color="secondary" size="lg" onClick={() => props.history.push('/register')}>Get Started</Button>
         </Container>
        
       </Jumbotron>

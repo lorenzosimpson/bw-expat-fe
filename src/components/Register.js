@@ -53,7 +53,8 @@ const Register = (props) => {
                             <Field type="password" name="password" id="examplePassword" placeholder="password" />
                             {touched.password && errors.password && ( <p className="error">{errors.password}</p> )}
                     </FormGroup>
-                    <Button type="submit" color="primary" size="lg">Log in</Button>{' '}
+                    <Button type="submit" color="primary" size="lg">Register</Button>{' '}
+                    <p onClick={() => props.history.push('/login')}>Already have an account? Log in</p>
                 </Form>
             )}
         />
