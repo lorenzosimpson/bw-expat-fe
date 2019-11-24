@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink as RouteLink } from 'react-router-dom'
+import { NavLink as RouteLink, Redirect, Route } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
@@ -43,7 +43,7 @@ const Navigation = (props) => {
                 <NavLink>Profile</NavLink>
               </RouteLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
+            {/* <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Options
               </DropdownToggle>
@@ -59,7 +59,17 @@ const Navigation = (props) => {
                   Reset
                 </DropdownItem>
               </DropdownMenu>
-            </UncontrolledDropdown>
+            </UncontrolledDropdown> */}
+             <NavItem>
+              <div onClick={() => {
+                if (localStorage.getItem('token') && window.confirm('Are you sure you want to log out?')) {
+                  localStorage.clear();
+                  props.history.push('/')
+              }}
+                } >
+                <NavLink>Log out</NavLink>
+              </div>
+              </NavItem>
           </Nav>
         </Collapse>
       </Navbar>

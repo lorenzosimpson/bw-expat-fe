@@ -7,7 +7,18 @@ import { Button } from 'reactstrap';
 
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
+    const [user, setUser] = useState({})
     const id = localStorage.getItem('id')
+
+    useEffect(() => {
+        axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
+        .then(res => {
+            console.log(res)
+            setUser(res.data)
+        })
+        .catch(err => console.log(err))
+    }, [id])
+
 
     useEffect(() => {
         axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
@@ -26,6 +37,7 @@ console.log(trips)
 
     return (
         <div className='profile'>
+            <h1>Welcome, {user.first_name}</h1>
             <NavLink to={`/profile/${id}/newtrip`} >    
             <Button id='block-btn' outline color="primary" size="lg" block>New trip + </Button>
             </NavLink>
