@@ -42,7 +42,7 @@ const Login = (props) => {
                     </FormGroup>
 
                     <FormGroup>
-                            <Field type="password" name="password" id="examplePassword" placeholder="password placeholder" />
+                            <Field type="password" name="password" id="examplePassword" placeholder="password" />
                             {touched.password && errors.password && ( <p className="error">{errors.password}</p> )}
                     </FormGroup>
                     <Button type="submit" color="primary" size="lg">Log in</Button>{' '}

@@ -39,7 +39,7 @@ console.log(trips)
         <div className='profile'>
             <h1>Welcome, {user.first_name}</h1>
             <NavLink to={`/profile/${id}/newtrip`} >    
-            <Button id='block-btn' outline color="primary" size="lg" block>New trip + </Button>
+            <Button id='block-btn' outline color="secondary" size="lg" block>New trip + </Button>
             </NavLink>
             
             {trips.length ? 
