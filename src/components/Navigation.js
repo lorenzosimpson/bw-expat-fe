@@ -28,17 +28,17 @@ const Navigation = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem>
+            <NavItem onClick={toggle}>
               <RouteLink to='/login'>
                 <NavLink>Log in</NavLink>
               </RouteLink>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={toggle}>
               <RouteLink to='/register'>
                 <NavLink>Register</NavLink>
               </RouteLink>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={toggle}>
               <RouteLink to={localStorage.getItem('token')? `/profile/${localStorage.getItem('id')}` : '/login'}>
                 <NavLink>Profile</NavLink>
               </RouteLink>
@@ -60,7 +60,7 @@ const Navigation = (props) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown> */}
-             <NavItem>
+             <NavItem onClick={toggle}>
               <div onClick={() => {
                 if (localStorage.getItem('token') && window.confirm('Are you sure you want to log out?')) {
                   localStorage.clear();
