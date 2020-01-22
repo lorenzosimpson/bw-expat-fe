@@ -7,19 +7,19 @@ import { FormGroup, Button } from 'reactstrap';
 import axiosWithAuth from '../utils/axiosWithAuth'
 
 const AddTrip = (props) => {
-    const user_id = props.match.params.id
+    const user_id = localStorage.getItem('id')
     return (
         <Formik 
 
             initialValues={{
-                user_id: user_id,
+                user_id: Number(user_id),
                 country: '',
                 city: '',
                 trip_title: '',
                 trip_desc: '',
             }}
             onSubmit={fields => {
-               
+                    console.log(fields)
                     axiosWithAuth().post(`/trips`, fields)
                     .then(res => {
                         console.log(res)
