@@ -7,7 +7,7 @@ import { FormGroup, Button } from 'reactstrap';
 import axiosWithAuth from '../utils/axiosWithAuth'
 
 const AddTrip = (props) => {
-    const user_id = localStorage.getItem('id')
+    const user_id = localStorage.getItem('user_id')
     return (
         <Formik 
 

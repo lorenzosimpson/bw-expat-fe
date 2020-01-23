@@ -8,7 +8,7 @@ import { Button } from 'reactstrap';
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
     const [user, setUser] = useState({})
-    const id = localStorage.getItem('id')
+    const id = localStorage.getItem('user_id')
 
     useEffect(() => {
         axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)

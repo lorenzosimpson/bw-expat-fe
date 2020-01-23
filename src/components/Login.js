@@ -22,7 +22,7 @@ const Login = (props) => {
                 try {
                    let res = await axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
                         localStorage.setItem('token', res.data.token)
-                        localStorage.setItem('id', res.data.id)
+                        localStorage.setItem('user_id', res.data.id)
                         props.history.push(`/profile/${res.data.id}`)
                         console.log(res, 'response')
                 } catch(err) {
