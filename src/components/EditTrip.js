@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { Form, FormGroup, Button, Input } from 'reactstrap';
+import { SessionContext } from '../utils/SessionContext';
 
 const EditTrip = props => {
     const id = props.match.params.id
-    const user_id = localStorage.getItem('id')
+    const user_id = localStorage.getItem('user_id')
     const [trip, setTrip] = useState({
         trip_title: ""
     })
@@ -27,7 +28,6 @@ const EditTrip = props => {
     const handleSubmit = e => {
         e.preventDefault()
         delete trip.photos
-        console.log(trip)
         axiosWithAuth()
         .put(`/trips/${id}`, trip)
         .then(res => {
@@ -35,7 +35,7 @@ const EditTrip = props => {
             props.history.push(`/profile/${user_id}`)
             axiosWithAuth()
                 .get(`/users/${user_id}`)
-                .then(res => console.log(res))
+                .then(res => null)
                 .catch(err => console.log(err))
             console.log(res)
         })

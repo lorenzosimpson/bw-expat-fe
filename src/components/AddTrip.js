@@ -19,13 +19,13 @@ const AddTrip = (props) => {
                 trip_desc: '',
             }}
             onSubmit={fields => {
-                    console.log(fields)
+                    
                     axiosWithAuth().post(`/trips`, fields)
                     .then(res => {
                         console.log(res)
                         props.history.push(`/profile/${user_id}`)
                         axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${user_id}/trips`)
-                        .then(res => console.log(res))
+                        .then(res => null)
                         .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err))

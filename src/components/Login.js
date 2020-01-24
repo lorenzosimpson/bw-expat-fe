@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { FormGroup, Button } from 'reactstrap';
+import { SessionContext } from '../utils/SessionContext';
 
 const Login = (props) => {
-
+    const {loggedIn, setLoggedIn}  = useContext(SessionContext)
+    console.log(loggedIn)
     return (
         <Formik 
             initialValues={{
@@ -23,11 +25,16 @@ const Login = (props) => {
                    let res = await axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
+                        setLoggedIn(true)
                         props.history.push(`/profile/${res.data.id}`)
-                        console.log(res, 'response')
+                       
+                        
                 } catch(err) {
+                    console.log(err)
                         if (err.toString().includes('401') ) {
                             window.alert('Please check login credentials and try again.')
+                        } else {
+                            window.alert('An error occurred, please try again later.')
                         }
                 }
                 

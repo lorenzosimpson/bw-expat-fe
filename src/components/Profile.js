@@ -1,9 +1,10 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import TripThumb from './TripThumb';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { Button } from 'reactstrap';
+import { SessionContext } from '../utils/SessionContext';
 
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
@@ -13,7 +14,7 @@ const Profile = (props) => {
     useEffect(() => {
         axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
         .then(res => {
-            console.log(res)
+          
             setUser(res.data)
         })
         .catch(err => console.log(err))
@@ -23,17 +24,12 @@ const Profile = (props) => {
     useEffect(() => {
         axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
         .then(res => {
-            console.log(res)
             setTrips(res.data)
         })
         .catch(err => console.log(err))
     }, [id])
 
     
-
-
-console.log(id, 'id')
-console.log(trips)
 
     return (
         <div className='profile'>

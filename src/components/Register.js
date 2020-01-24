@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { FormGroup, Button } from 'reactstrap';
+import { SessionContext } from '../utils/SessionContext';
 
 const Register = (props) => {
+
+    const {loggedIn, setLoggedIn} = useContext(SessionContext);
 
     return (
         <Formik 
@@ -24,8 +27,9 @@ const Register = (props) => {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
                         props.history.push(`/profile/${res.data.id}`)
-                        console.log(res, 'response')
+                        setLoggedIn(true)
                 } catch(err) {
+                    console.log(err)
                             window.alert('An error occurred. Please try again later.')
                 }
                 
@@ -54,7 +58,7 @@ const Register = (props) => {
                             {touched.password && errors.password && ( <p className="error">{errors.password}</p> )}
                     </FormGroup>
                     <Button type="submit" color="primary" size="lg">Register</Button>{' '}
-                    <p onClick={() => props.history.push('/login')}>Already have an account? Log in</p>
+                    <p id='rt-to-login' onClick={() => props.history.push('/login')}>Already have an account? Log in</p>
                 </Form>
             )}
         />

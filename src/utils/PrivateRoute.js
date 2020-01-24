@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { SessionContext } from './SessionContext';
 
 const PrivateRoute = ({component: Component, ...rest}) => {
+   const token = localStorage.getItem('token')
 
     return (
         <Route 
             {...rest}
             render={props => {
-                if (localStorage.getItem('token')) {
+                if (token) {
                     return <Component {...props}/>
                 } else {
                     return <Redirect to="/login" />
