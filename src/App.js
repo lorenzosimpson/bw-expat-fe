@@ -11,9 +11,10 @@ import AddPhoto from './components/AddPhoto'
 import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { SessionContext } from './utils/SessionContext';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 function App() {
-
+  
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [loginUser, setLoginUser] = useState({})

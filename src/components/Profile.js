@@ -10,12 +10,13 @@ const Profile = (props) => {
     const [trips, setTrips] = useState([])
     const [user, setUser] = useState({})
     const id = localStorage.getItem('user_id')
+    const {loggedIn, setLoggedIn}  = useContext(SessionContext)
 
     useEffect(() => {
         axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
         .then(res => {
-          
             setUser(res.data)
+            setLoggedIn(true)
         })
         .catch(err => console.log(err))
     }, [id])

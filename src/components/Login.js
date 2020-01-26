@@ -6,8 +6,7 @@ import { FormGroup, Button } from 'reactstrap';
 import { SessionContext } from '../utils/SessionContext';
 
 const Login = (props) => {
-    const {loggedIn, setLoggedIn}  = useContext(SessionContext)
-    console.log(loggedIn)
+   
     return (
         <Formik 
             initialValues={{
@@ -20,16 +19,14 @@ const Login = (props) => {
                 password: Yup.string()
                     .required('Password is required'),
             })}
-            onSubmit={async fields => { 
-                try {
-                   let res = await axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
+            onSubmit={fields => { 
+                axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
+                .then(res => {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
-                        setLoggedIn(true)
-                        props.history.push(`/profile/${res.data.id}`)
-                       
-                        
-                } catch(err) {
+                        props.history.push(`/profile/${localStorage.getItem('user_id')}`)
+
+                }).catch(err => {
                     console.log(err)
                         if (err.toString().includes('401') ) {
                             window.alert('Please check login credentials and try again.')
@@ -37,6 +34,7 @@ const Login = (props) => {
                             window.alert('An error occurred, please try again later.')
                         }
                 }
+                )
                 
             }}
             render={({ errors, touched}) => (

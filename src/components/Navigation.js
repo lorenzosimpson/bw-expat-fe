@@ -13,10 +13,12 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import {useDarkMode} from '../hooks/useDarkMode';
 
 import { SessionContext } from '../utils/SessionContext';
 
 const Navigation = (props) => {
+  const [darkMode, setDarkMode] = useDarkMode()
   const [isOpen, setIsOpen] = useState(false);
   const {loggedIn, setLoggedIn} = useContext(SessionContext);
   const user_id = localStorage.getItem('user_id')
@@ -25,6 +27,7 @@ const Navigation = (props) => {
 
   return (
     <div>
+
       <Navbar color="light" light expand="md">
         <RouteLink to="/">
           <NavbarBrand id='expat-logo'>expatJournal</NavbarBrand>
@@ -52,7 +55,6 @@ const Navigation = (props) => {
             <NavItem onClick={toggle}>
             <div onClick={() => {
               if (loggedIn && window.confirm('Are you sure you want to log out?')) {
-                localStorage.clear();
                 props.history.push('/')
                 setLoggedIn(false)
             }}
@@ -62,6 +64,7 @@ const Navigation = (props) => {
             </NavItem>
             )}
           </Nav>
+          <button onClick={(() => setDarkMode(!darkMode))}>{darkMode ? '🌞' : '🌙'}</button>
         </Collapse>
       </Navbar>
     </div>
