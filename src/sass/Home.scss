@@ -1,12 +1,20 @@
-
+.home-wrapper {
+    background: url('https://source.unsplash.com/featured/1600x900/?travel');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: inherit;
+  height: 100vh;
+  overflow: hidden;
+}
 
 #container {
     margin-left: 150px;
-    margin-top: 100px;
     background: white;
     background:rgba(0,0,0,0.5);
     width: 500px;
     color: white;
+    position: relative;
+    top: 100px;
 
     button {
         margin: 50px;

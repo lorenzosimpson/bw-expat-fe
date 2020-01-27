@@ -22,13 +22,14 @@ const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const {loggedIn, setLoggedIn} = useContext(SessionContext);
   const user_id = localStorage.getItem('user_id')
+  const token = localStorage.getItem('token')
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
 
-      <Navbar color="light" light expand="md">
+      <Navbar color={darkMode ? '#383838' : 'light'} light expand="md">
         <RouteLink to="/">
           <NavbarBrand id='expat-logo'>expatJournal</NavbarBrand>
         </RouteLink>
@@ -45,7 +46,7 @@ const Navigation = (props) => {
                 <NavLink>Profile</NavLink>
               </RouteLink>
             </NavItem>
-            {!loggedIn ? (
+            {!token ? (
             <NavItem onClick={toggle}>
             <RouteLink to='/login'>
               <NavLink>Log in</NavLink>
@@ -54,8 +55,9 @@ const Navigation = (props) => {
             ) :  ( 
             <NavItem onClick={toggle}>
             <div onClick={() => {
-              if (loggedIn && window.confirm('Are you sure you want to log out?')) {
+              if (token && window.confirm('Are you sure you want to log out?')) {
                 props.history.push('/')
+                localStorage.clear()
                 setLoggedIn(false)
             }}
               } >
@@ -64,7 +66,7 @@ const Navigation = (props) => {
             </NavItem>
             )}
           </Nav>
-          <button onClick={(() => setDarkMode(!darkMode))}>{darkMode ? '🌞' : '🌙'}</button>
+          <div onClick={(() => setDarkMode(!darkMode))}>{darkMode ? '🌞' : '🌙'}</div>
         </Collapse>
       </Navbar>
     </div>

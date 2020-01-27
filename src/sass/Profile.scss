@@ -1,9 +1,40 @@
 .profile {
-    text-align: center;
     background: white;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-right: 10%;
 
-    button {
-        margin:   30px 20px;
+    .profile-info{
+        display: flex;
+        align-items: center;
+        img {
+            border-radius: 100%;
+            width: 200px;
+            height: 200px;
+            border: 1px solid lightgray;
+            margin-right: 30px;
+        }
+
+    }
+
+    
+
+    a:hover {
+        text-decoration: none;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        button {
+            margin:   30px 20px;
+            width: 200px;
+        }
+
+    }
+   
+    .card-body {
+        padding: 0;
     }
 
     #block-btn {

@@ -6,6 +6,7 @@ import { FormGroup, Button } from 'reactstrap';
 import { SessionContext } from '../utils/SessionContext';
 
 const Login = (props) => {
+    const { loggedIn, setLoggedIn } = useContext(SessionContext)
    
     return (
         <Formik 
@@ -24,7 +25,9 @@ const Login = (props) => {
                 .then(res => {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
+                        setLoggedIn(true)
                         props.history.push(`/profile/${localStorage.getItem('user_id')}`)
+                       
 
                 }).catch(err => {
                     console.log(err)
