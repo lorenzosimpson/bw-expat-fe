@@ -66,7 +66,7 @@ const Navigation = (props) => {
             </NavItem>
             )}
           </Nav>
-          <div onClick={(() => setDarkMode(!darkMode))}>{darkMode ? '🌞' : '🌙'}</div>
+          <div className='toggler' onClick={(() => setDarkMode(!darkMode))}>{darkMode ? '🌞' : '🌙'}</div>
         </Collapse>
       </Navbar>
     </div>

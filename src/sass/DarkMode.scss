@@ -1,6 +1,7 @@
 .dark-mode {
     background: #383838;
     color: white;
+    transition: 0.5s;
     nav a {
         color: white !important;
     }
@@ -9,6 +10,10 @@
 
         .card-body {
             background: #383838;
+        }
+
+        #block-btn {
+            color: white;
         }
     }
 }
