@@ -17,9 +17,14 @@
             margin-right: 30px;
         }
 
+        
+
     }
 
-    
+    .material-icons {
+        cursor: pointer;
+        margin: 0 10px 0 0px;
+      }
 
     a:hover {
         text-decoration: none;
@@ -42,6 +47,10 @@
    
     .card-body {
         padding: 0;
+    }
+
+    .trip-container {
+        margin-bottom: 30px;
     }
 
     #block-btn {

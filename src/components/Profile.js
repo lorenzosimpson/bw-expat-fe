@@ -60,26 +60,22 @@ const Profile = (props) => {
             
             {trips.length ? 
                 trips.map(t => (
-                    <>
+                    <div className='trip-container'>
                     <TripThumb id={t.id} 
                     trip_title={t.trip_title}
                     trip_desc={t.trip_desc}
                     city={t.city}
                     country={t.country}
                       />
-                      <Button 
-                      outline color="info"
-                      onClick={()=> {
-                        props.history.push(`/edit/${t.id}`)
-                    }}>edit</Button>
                     
-                    <Button  
-                    outline color="info"
-                    onClick={() => props.history.push(`/addphoto/${t.id}`)}
-                    >add photo</Button>
+                    <i onClick={()=> {
+                        props.history.push(`/edit/${t.id}`)
+                    }} class="material-icons">
+                    edit
+                    </i>
 
-                    <Button 
-                    outline color="danger"
+
+                <i class="material-icons"
                     onClick={() => {
                         axiosWithAuth()
                         .delete(`/trips/${t.id}`)
@@ -95,8 +91,14 @@ const Profile = (props) => {
                                 setTrips([])
                             })
                         })
-                    }}>x</Button>
-                    </>
+                    }}>delete</i>
+                    
+                    {/* <Button  
+                    outline color="info"
+                    onClick={() => props.history.push(`/addphoto/${t.id}`)}
+                    >add photo</Button> */}
+
+                    </div>
                 )) :
                 <p>No trips yet!</p>
             }
