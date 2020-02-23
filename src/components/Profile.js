@@ -5,11 +5,13 @@ import TripThumb from './TripThumb';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { Button } from 'reactstrap';
 import { SessionContext } from '../utils/SessionContext';
+import ProfileGrid from './ProfileGrid';
 
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
     const [user, setUser] = useState({})
     const id = localStorage.getItem('user_id')
+    const [grid, setGrid] = useState(true)
 
     useEffect(() => {
         axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
@@ -57,8 +59,8 @@ const Profile = (props) => {
             </container>   
             
             </NavLink>
-            
-            {trips.length ? 
+            <button onClick={() => setGrid(!grid)}>toggle grid</button>
+            {!grid ? 
                 trips.map(t => (
                     <div className='trip-container'>
                     <TripThumb id={t.id} 
@@ -93,14 +95,22 @@ const Profile = (props) => {
                         })
                     }}>delete</i>
                     
-                    {/* <Button  
-                    outline color="info"
-                    onClick={() => props.history.push(`/addphoto/${t.id}`)}
-                    >add photo</Button> */}
-
                     </div>
-                )) :
-                <p>No trips yet!</p>
+                )) : (
+                    <div className='trip-container'>
+                        <div className='grid-card-container'>
+                    {trips.map(t => (
+                        <ProfileGrid 
+                            id={t.id} 
+                            trip_title={t.trip_title}
+                            trip_desc={t.trip_desc}
+                            city={t.city}
+                            country={t.country}
+                            />
+                    ))}
+                    </div>
+                    </div>
+                )
             }
 
 
