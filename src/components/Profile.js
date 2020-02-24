@@ -59,7 +59,20 @@ const Profile = (props) => {
             </container>   
             
             </NavLink>
-            <button onClick={() => setGrid(!grid)}>toggle grid</button>
+            <span style={{
+                display: 'flex'
+                }}>
+                <p>View as </p> <div style={{marginLeft: '5px'}} onClick={() => setGrid(!grid)}>{
+                    grid ?
+                    <i class="material-icons">
+                        grid_on
+                    </i> : 
+                    <i class="material-icons">
+                        format_list_bulleted
+                    </i>}
+                    </div>
+            </span>
+                
             {!grid ? 
                 trips.map(t => (
                     <div className='trip-container'>
@@ -108,7 +121,7 @@ const Profile = (props) => {
                             country={t.country}
                             />
                     ))}
-                    </div>
+                        </div>
                     </div>
                 )
             }
