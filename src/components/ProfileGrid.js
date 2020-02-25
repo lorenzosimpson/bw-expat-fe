@@ -2,12 +2,12 @@ import React from 'react';
 import { Card, CardBody, Button, CardTitle, CardText, CardImg } from 'reactstrap';
 
 const ProfileGrid = (props) => {
-    console.log(props)
   return (
       <Card style={
           {
-            width: '200px',
-            margin: '10px'
+            width: '250px',
+            margin: '10px',
+            padding: '20px',
         }
           }>
         <CardImg top width="100%" src={`https://source.unsplash.com/featured/1600x900?${props.city}, city, skyline`} alt="Card image cap" />

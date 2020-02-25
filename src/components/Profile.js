@@ -12,6 +12,7 @@ const Profile = (props) => {
     const [user, setUser] = useState({})
     const id = localStorage.getItem('user_id')
     const [grid, setGrid] = useState(true)
+    const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
         axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
@@ -30,7 +31,16 @@ const Profile = (props) => {
         .catch(err => console.log(err))
     }, [id])
 
-    
+    const results = !searchTerm.length ? trips : 
+    trips.filter(t => t.trip_title.toLowerCase().includes(searchTerm) ||
+    t.country.toLowerCase().includes(searchTerm) ||
+    t.city.toLowerCase().includes(searchTerm)
+
+    );
+
+    function handleChange(e) {
+        setSearchTerm(e.target.value.toLowerCase())
+    }
 
     return (
         <div className='profile'>
@@ -53,12 +63,22 @@ const Profile = (props) => {
                   
             </section>
             
-            <NavLink to={`/profile/${id}/newtrip`} > 
+            <form onChange={handleChange} className='search-input'>
+                <div className='input-container'>
+                <i class="material-icons" id='mag-glass'>
+                    search
+                </i>
+                <input 
+                className='input'
+                name='searchTerm'
+                placeholder='Search trips'></input>
+                </div>
+            </form>
             <container className='btn-container'>
-                <Button id='block-btn' outline color="secondary" size="lg" block>New trip + </Button>
+                <Button onClick={() => props.history.push(`/profile/${id}/newtrip`)} id='block-btn' outline color="secondary" size="lg" block>New trip + </Button>
             </container>   
             
-            </NavLink>
+          
             <span style={{
                 display: 'flex'
                 }}>
@@ -74,7 +94,7 @@ const Profile = (props) => {
             </span>
                 
             {!grid ? 
-                trips.map(t => (
+                results.map(t => (
                     <div className='trip-container'>
                     <TripThumb id={t.id} 
                     trip_title={t.trip_title}
@@ -95,14 +115,12 @@ const Profile = (props) => {
                         axiosWithAuth()
                         .delete(`/trips/${t.id}`)
                         .then(res => {
-                            console.log(res)
+                            
                             axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
                             .then(res => {
-                                console.log(res)
                                 setTrips(res.data)
                             })
                             .catch(err => {
-                                console.log(err)
                                 setTrips([])
                             })
                         })
@@ -112,7 +130,7 @@ const Profile = (props) => {
                 )) : (
                     <div className='trip-container'>
                         <div className='grid-card-container'>
-                    {trips.map(t => (
+                    {results.map(t => (
                         <ProfileGrid 
                             id={t.id} 
                             trip_title={t.trip_title}
@@ -125,10 +143,6 @@ const Profile = (props) => {
                     </div>
                 )
             }
-
-
-
-
         </div>
     )
 }

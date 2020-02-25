@@ -1,0 +1,27 @@
+.search-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    .input-container {
+        display: flex;
+        align-items: center;
+        border: 1px solid;
+        padding: 5px 10px;
+        background: white;
+        color: black;
+        border-radius: 5px;
+        
+        #mag-glass {
+        position: relative;
+        color: inherit;
+        cursor: auto;
+        }
+
+        .input {
+            width: 200px;
+            border: none;
+        }
+    }
+}
