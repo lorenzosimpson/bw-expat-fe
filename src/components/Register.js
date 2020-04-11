@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { FormGroup, Button } from 'reactstrap';
 import { SessionContext } from '../utils/SessionContext';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Register = (props) => {
 
@@ -23,7 +24,7 @@ const Register = (props) => {
             })}
             onSubmit={async fields => { 
                 try {
-                   let res = await axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/register`, fields)
+                   let res = await axiosWithAuth().post(`/users/register`, fields)
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
                         props.history.push(`/profile/${res.data.id}`)

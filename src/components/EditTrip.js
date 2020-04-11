@@ -9,6 +9,7 @@ const EditTrip = props => {
     const [trip, setTrip] = useState({
         trip_title: ""
     })
+    const [changes, setChanges] = useState({})
 
     useEffect(() => { 
         axiosWithAuth()
@@ -17,8 +18,8 @@ const EditTrip = props => {
     }, [id])
 
     const handleChange = e => {
-        setTrip({
-            ...trip,
+        setChanges({
+            ...changes,
             [e.target.name]: e.target.value,
         })
     }
@@ -29,7 +30,7 @@ const EditTrip = props => {
         e.preventDefault()
         delete trip.photos
         axiosWithAuth()
-        .put(`/trips/${id}`, trip)
+        .put(`/trips/${id}`, changes)
         .then(res => {
             console.log(res)
             props.history.push(`/profile/${user_id}`)
@@ -46,19 +47,19 @@ const EditTrip = props => {
        
             <Form onChange={handleChange} onSubmit={handleSubmit}>
                 <FormGroup>
-                    <Input name='country' type='text' placeholder='Country' value={trip.country}></Input>
+                    <Input name='country' type='text' placeholder={trip.country}></Input>
                 </FormGroup>
 
                 <FormGroup>
-                    <Input name='city' type='text' placeholder='City' value={trip.city} ></Input>
+                    <Input name='city' type='text' placeholder={trip.city} ></Input>
                 </FormGroup>
 
                 <FormGroup>
-                    <Input name='trip_title' type='text' placeholder='Trip Title' value={trip.trip_title}></Input>
+                    <Input name='trip_title' type='text' placeholder={trip.trip_title}></Input>
                 </FormGroup>
 
                 <FormGroup>
-                    <Input name='trip_desc' type='text' placeholder='Trip Description' value={trip.trip_desc}></Input>
+                    <Input name='trip_desc' type='text' placeholder={trip.trip_desc}></Input>
                 </FormGroup>
                 <Button type="submit" color="primary" size="lg">Edit</Button>{' '}
             </Form>

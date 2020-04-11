@@ -12,6 +12,7 @@ import { Route } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { SessionContext } from './utils/SessionContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import individualTrip from './components/individualTrip';
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
       <Route exact path='/' component={Home} />
       <Route exact path='/login' component={Login} />
       <Route exact path='/register' component={Register} />
+      <Route exact path='/trips/:id' component={individualTrip} />
       <PrivateRoute exact path='/profile/:id' component={Profile} />
       <PrivateRoute exact path='/profile/:id/newtrip' component={AddTrip} />
       <PrivateRoute exact path='/edit/:id' component={EditTrip} />

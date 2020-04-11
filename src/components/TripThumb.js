@@ -6,7 +6,7 @@ import {
 
 const TripThumb = (props) => {
   return (
-    <div>
+    <div className='tr-thumb'>
       <Card className='trip-thumbnail'>
         <CardImg top width="100%" src={`https://source.unsplash.com/featured/1600x900?${props.city}, city, skyline`} alt="Card image cap" />
         <CardBody>

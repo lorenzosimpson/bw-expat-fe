@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { FormGroup, Button } from 'reactstrap';
 import { SessionContext } from '../utils/SessionContext';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Login = (props) => {
     const { loggedIn, setLoggedIn } = useContext(SessionContext)
@@ -21,7 +22,7 @@ const Login = (props) => {
                     .required('Password is required'),
             })}
             onSubmit={fields => { 
-                axios.post(`https://bw-expat-journal-ls.herokuapp.com/api/users/login`, fields)
+                axiosWithAuth().post(`/users/login`, fields)
                 .then(res => {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)

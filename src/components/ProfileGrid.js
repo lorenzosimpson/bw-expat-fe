@@ -2,8 +2,14 @@ import React from 'react';
 import { Card, CardBody, Button, CardTitle, CardText, CardImg } from 'reactstrap';
 
 const ProfileGrid = (props) => {
+  console.log(props)
+  function routeToTrip(id){
+    props.history.push(`/trips/${id}`)
+  }
   return (
-      <Card style={
+      <Card className='grid-card'
+      onClick={() => routeToTrip(props.id)}
+      style={
           {
             width: '250px',
             margin: '10px',

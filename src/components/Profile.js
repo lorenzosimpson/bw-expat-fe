@@ -15,7 +15,7 @@ const Profile = (props) => {
     const [searchTerm, setSearchTerm] = useState('')
 
     useEffect(() => {
-        axiosWithAuth().get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/`)
+        axiosWithAuth().get(`/users/${id}/`)
         .then(res => {
             setUser(res.data)
         })
@@ -24,7 +24,7 @@ const Profile = (props) => {
 
 
     useEffect(() => {
-        axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
+        axiosWithAuth().get(`/users/${id}/trips`)
         .then(res => {
             setTrips(res.data)
         })
@@ -42,6 +42,7 @@ const Profile = (props) => {
         setSearchTerm(e.target.value.toLowerCase())
     }
 
+   
     return (
         <div className='profile'>
 
@@ -116,7 +117,7 @@ const Profile = (props) => {
                         .delete(`/trips/${t.id}`)
                         .then(res => {
                             
-                            axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${id}/trips`)
+                            axiosWithAuth.get(`/users/${id}/trips`)
                             .then(res => {
                                 setTrips(res.data)
                             })
@@ -131,7 +132,8 @@ const Profile = (props) => {
                     <div className='trip-container'>
                         <div className='grid-card-container'>
                     {results.map(t => (
-                        <ProfileGrid 
+                        <ProfileGrid
+                            history={props.history} 
                             id={t.id} 
                             trip_title={t.trip_title}
                             trip_desc={t.trip_desc}

@@ -24,7 +24,7 @@ const AddTrip = (props) => {
                     .then(res => {
                         console.log(res)
                         props.history.push(`/profile/${user_id}`)
-                        axios.get(`https://bw-expat-journal-ls.herokuapp.com/api/users/${user_id}/trips`)
+                        axiosWithAuth().get(`/users/${user_id}/trips`)
                         .then(res => null)
                         .catch(err => console.log(err))
                     })
