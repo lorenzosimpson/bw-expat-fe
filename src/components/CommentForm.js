@@ -1,13 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { SessionContext } from '../utils/SessionContext';
 function CommentForm(props) {
     const [comment, setComment] = useState('')
     const {trip_id} = props;
     const user_id = localStorage.getItem('user_id')
-    const { username } = useContext(SessionContext)
     const { setTrip } = props;
+    const [commenter, setCommenter] = useState({})
 
+    useEffect(() => {
+        axiosWithAuth()
+        .get(`/users/${user_id}`)
+        .then(res => {
+            console.log(res)
+            setCommenter(res.data)
+        })
+        .catch(err => console.log(err))
+    }, [])
 
     function handleChange(e) {
         setComment(e.target.value)
@@ -19,8 +28,8 @@ function CommentForm(props) {
         const request = {
             comment: comment,
             trip_id: trip_id,
-            user_id: user_id,
-            commenter_name: username,
+            user_id: commenter.id,
+            commenter_name: commenter.username,
         }
         console.log(request)
         axiosWithAuth()

@@ -10,7 +10,7 @@ import ProfileGrid from './ProfileGrid';
 const Profile = (props) => {
     const [trips, setTrips] = useState([])
     const [user, setUser] = useState({})
-    const id = localStorage.getItem('user_id')
+    const id = props.match.params.id;
     const [grid, setGrid] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
     const {setUsername} = useContext(SessionContext);
