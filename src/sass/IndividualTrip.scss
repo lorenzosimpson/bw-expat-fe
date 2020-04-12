@@ -1,6 +1,15 @@
 .individual-container {
-    .trip-container {
-            margin: 0 auto;
-            max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1000px;
+
+    .title-comments-container {
+        display: flex;
+        .left-container {
+            width: 50%;
+        }
+        .right-container {
+            width: 50%;
+        }
     }
 }

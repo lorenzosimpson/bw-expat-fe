@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import TripThumb from './TripThumb';
+import CommentForm from './CommentForm';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 function IndividualTrip(props) {
@@ -15,7 +15,7 @@ function IndividualTrip(props) {
 
 
     console.log(trip)
-    const {trip_title, trip_desc, city, country, comments} = trip;
+    const {comments} = trip;
     
     if (!trip.comments) {
         return <h1>loading...</h1>
@@ -23,39 +23,46 @@ function IndividualTrip(props) {
 
     return (
         <div className='individual-container'>
-            <div className='trip-container'>
-                <TripThumb id={id} 
-                trip_title={trip_title}
-                trip_desc={trip_desc}
-                city={city}
-                country={country}
-                />
-                
-                <i onClick={()=> {
-                    props.history.push(`/edit/${id}`)
-                }} class="material-icons">
-                edit
-                </i>
+            <img top width="100%" src={`https://source.unsplash.com/featured/1600x900?${trip.city}, city, skyline`} alt="Card image cap" />
+                <div className='title-comments-container'>
+                <div className='left-container'>
+                    <h1>{trip.trip_title}</h1>
+                    <h4>{`${trip.city}, ${trip.country}`}</h4>
+                        <p>{trip.trip_desc}</p>
+                    <i onClick={()=> {
+                        props.history.push(`/edit/${id}`)
+                    }} class="material-icons">
+                    edit
+                    </i>
 
-            <i class="material-icons"
-                onClick={() => {
-                    axiosWithAuth()
-                    .delete(`/trips/${id}`)
-                    .then(res => {
-                        props.history.push('/profile/')
-                    })
-                }}>delete</i>
-
-            <div className='comments'>
-                {comments.map(c => (
-                    <>
-                    <p>{c.commenter_name}</p>
-                        <p>{c.comment}</p>
-                        </>
-                    ))}
+                    <i class="material-icons"
+                    onClick={() => {
+                        axiosWithAuth()
+                        .delete(`/trips/${id}`)
+                        .then(res => {
+                            props.history.push('/profile/')
+                        })
+                    }}>delete</i>
                 </div>
-            
+        
+     
+            <div className='right-container'>
+
+                <div className='comments'>
+                    <h3>Comments</h3>
+                    {comments.map(c => (
+                        <>
+                        <h4>{c.commenter_name}</h4>
+                            <p>{c.comment}</p>
+                            </>
+                        ))}
+                </div>
+                
+                <CommentForm trip_id={trip.id} setTrip={setTrip}/>
+
             </div>
+            </div>
+
         </div>
     );
 }

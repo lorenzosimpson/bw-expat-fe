@@ -7,7 +7,7 @@ import { SessionContext } from '../utils/SessionContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Login = (props) => {
-    const { loggedIn, setLoggedIn } = useContext(SessionContext)
+    const { loggedIn, setLoggedIn, userId, setUserId } = useContext(SessionContext)
    
     return (
         <Formik 
@@ -27,7 +27,8 @@ const Login = (props) => {
                         localStorage.setItem('token', res.data.token)
                         localStorage.setItem('user_id', res.data.id)
                         setLoggedIn(true)
-                        props.history.push(`/profile/${localStorage.getItem('user_id')}`)
+                        setUserId(res.data.id)
+                        props.history.push(`/profile/${res.data.id}`)
                        
 
                 }).catch(err => {

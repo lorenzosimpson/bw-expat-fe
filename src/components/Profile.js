@@ -13,11 +13,14 @@ const Profile = (props) => {
     const id = localStorage.getItem('user_id')
     const [grid, setGrid] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
+    const {setUsername} = useContext(SessionContext);
+
 
     useEffect(() => {
         axiosWithAuth().get(`/users/${id}/`)
         .then(res => {
             setUser(res.data)
+            setUsername(res.data.username)
         })
         .catch(err => console.log(err))
     }, [id])

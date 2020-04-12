@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './sass/App.scss';
 import Navigation from './components/Navigation'
 import Home from './components/Home'
@@ -13,17 +13,19 @@ import PrivateRoute from './utils/PrivateRoute';
 import { SessionContext } from './utils/SessionContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import individualTrip from './components/individualTrip';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 function App() {
   
 
   const [loggedIn, setLoggedIn] = useState(false)
   const [loginUser, setLoginUser] = useState({})
-  const [user, setUser] = useState({})
+  const [userId, setUserId] = useState(Number)
+  const [username, setUsername] = useState('')
 
 
   return (
-    <SessionContext.Provider value={{loggedIn, setLoggedIn, loginUser, setLoginUser, user, setUser}}>
+    <SessionContext.Provider value={{loggedIn, setLoggedIn, loginUser, setLoginUser, userId, setUserId, username, setUsername}}>
     <div className="App">
       <Route path='/' component={Navigation} />
       <Route exact path='/' component={Home} />
